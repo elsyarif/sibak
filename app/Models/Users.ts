@@ -22,7 +22,7 @@ export default class Users extends BaseModel {
   public rememberMeToken?: string
 
   @column()
-  public isActive: string
+  public isActive: boolean
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
