@@ -1,0 +1,10 @@
+{
+    "form" : {
+		"required" : "Bidang { field } wajib diisi.",
+		"email" : "Bagian { field } harus berisi email yang sah.",
+		"minLength" : "Panjang { field } setidaknya paling sedikit { minLength } karakter",
+		"maxLength": "Panjang { field } tidak boleh melebihi { maxLength } karakter",
+		"unique": "Sudah terdaftar",
+		"notIn": "Bidang { field } : {value} tidak diizinkan."
+	}
+}

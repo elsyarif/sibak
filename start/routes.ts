@@ -19,7 +19,6 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
-import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 
 Route.get('/', async ({auth}) => {
   await auth.use("jwt").authenticate();
@@ -27,6 +26,5 @@ Route.get('/', async ({auth}) => {
   return { hello: 'world' }
 })
 
-Route.post('/login',async ({auth}:HttpContextContract) => {
-
-})
+Route.post('/login', 'AuthController.login')
+Route.post('/register', 'AuthController.register')
