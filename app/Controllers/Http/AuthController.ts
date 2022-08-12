@@ -3,19 +3,24 @@ import AuthService from "App/services/AuthService";
 import RegisterSchema from "App/Validators/RegisterUserValidator";
 
 export default class AuthController {
+
     public async login({ request, response, auth, i18n }: HttpContextContract) {
         const { identity, password } = request.body();
 
         try {
             const user = await AuthService.validate(identity, password)
     
-            const { rememberMeToken, createdAt, updatedAt, ...result} = user
-
             const jwt = await auth.use('jwt').generate(user, {
                 payload: {
                     username: user.username,
                     email: user.email
                 }
+            })
+
+            response.cookie('x-refresh-token', jwt.refreshToken, {
+                httpOnly: true,
+                maxAge: 86400 * 30,
+                secure: false 
             })
 
             response.ok({
@@ -53,6 +58,29 @@ export default class AuthController {
                 message: "failed",
                 error: error.messages.errors,
             });
+        }
+    }
+
+    public async refresh({ auth, request, response, i18n }: HttpContextContract){
+        const refresh = request.cookie('x-refresh-token')
+
+        const jwt = await auth.use('jwt').loginViaRefreshToken(refresh)
+
+        response.ok({
+            message: 'access token created',
+            data: {
+                acces_token : jwt.accessToken
+            }
+        })
+    }
+
+    public async logout({ auth, response, i18n }: HttpContextContract){
+        await auth.use('jwt').revoke()
+        
+        response.clearCookie('x-refresh-token')
+
+        return {
+            revoked: true
         }
     }
 }
