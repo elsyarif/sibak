@@ -1,7 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
-import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
-
+import { BaseModel, beforeSave, column } from '@ioc:Adonis/Lucid/Orm'
+import slug from 'slug'
 
 export default class Menu extends BaseModel {
   @column({ isPrimary: true })
@@ -14,11 +13,6 @@ export default class Menu extends BaseModel {
   public title: string
 
   @column()
-  @slugify({
-    strategy: 'dbIncrement',
-    fields: ['title'],
-    allowUpdates: true,
-  })
   public meta_title: string
 
   @column()
@@ -33,10 +27,14 @@ export default class Menu extends BaseModel {
   @column()
   public isActive: boolean
 
-
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @beforeSave()
+  public static async assignMetaTitle(menu: Menu){
+    menu.meta_title = slug(menu.title)
+  }
 }
