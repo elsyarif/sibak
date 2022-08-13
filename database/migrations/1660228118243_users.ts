@@ -12,6 +12,7 @@ export default class UsersSchema extends BaseSchema {
       table.string('password', 180).notNullable()
       table.string('remember_me_token').nullable()
       table.string('role').references('id').inTable('roles')
+      table.string('group').references('id').inTable('user_groups').notNullable()
       table.boolean('is_active').defaultTo(false)
 
       /**

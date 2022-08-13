@@ -32,7 +32,8 @@
       "@adonisjs/lucid",
       "@adonisjs/i18n",
       "@adonisjs/auth",
-      "adonis5-jwt"
+      "adonis5-jwt",
+      "@adonisjs/lucid-slugify"
     ]
   }
 }

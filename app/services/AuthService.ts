@@ -1,7 +1,6 @@
 import Users from "App/Models/Users";
 import RegisterInterface from "App/interface/auth/register.interface";
 import Logger from '@ioc:Adonis/Core/Logger';
-import Database from "@ioc:Adonis/Lucid/Database";
 import Hash from "@ioc:Adonis/Core/Hash";
 
 class AuthService {
@@ -16,7 +15,7 @@ class AuthService {
         if(!match){
             throw new Error('password salah')
         }
-        
+
         return user;
     }
 
@@ -30,6 +29,7 @@ class AuthService {
 
         return await user.save();
     }
+
 }
 
 export default new AuthService();

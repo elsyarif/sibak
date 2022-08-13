@@ -3,6 +3,7 @@ import Hash from '@ioc:Adonis/Core/Hash'
 import { column, beforeSave, BaseModel, beforeCreate, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import { v4 as uuid }from 'uuid'
 import Role from './Role'
+import UserGroup from './UserGroup';
 
 export default class Users extends BaseModel {
   @column({ isPrimary: true })
@@ -25,7 +26,10 @@ export default class Users extends BaseModel {
 
   @belongsTo(() => Role)
   public role: BelongsTo<typeof Role>
-  
+
+  @belongsTo(() => UserGroup)
+  public group: BelongsTo<typeof UserGroup>
+
   @column()
   public isActive: boolean
 

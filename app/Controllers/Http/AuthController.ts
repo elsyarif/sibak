@@ -1,27 +1,26 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import AuthService from "App/services/AuthService";
 import RegisterSchema from "App/Validators/RegisterUserValidator";
+import Logger from '@ioc:Adonis/Core/Logger';
 
 export default class AuthController {
 
     public async login({ request, response, auth, i18n }: HttpContextContract) {
-        const { identity, password } = request.body();
+        const { uid, password } = request.body();
 
         try {
-            const user = await AuthService.validate(identity, password)
-    
-            const jwt = await auth.use('jwt').generate(user, {
-                payload: {
-                    username: user.username,
-                    email: user.email
-                }
-            })
+            // const user = await AuthService.validate(uid, password)
+            const user = await auth.verifyCredentials(uid, password)
+
+            const jwt = await auth.use('jwt').login(user)
+            Logger.info('running')
 
             response.cookie('x-refresh-token', jwt.refreshToken, {
                 httpOnly: true,
-                maxAge: 86400 * 30,
-                secure: false 
+                maxAge: 86400 * 30, // 30 days
+                secure: false
             })
+
 
             response.ok({
                 message: i18n.formatMessage("auth.login"),
@@ -32,11 +31,11 @@ export default class AuthController {
                     access_token: jwt.accessToken,
                 }
             })
-            
+
         } catch (error) {
             response.badRequest({
-                message: 'failed',
-                data: error.message
+                message: i18n.formatMessage('auth.invalid_login'),
+                error: error.message
             })
         }
     }
@@ -45,7 +44,7 @@ export default class AuthController {
         try {
             const payload = await request.validate(RegisterSchema);
 
-            const user = await AuthService.register({...payload, isActive: true})
+            const user = await AuthService.register({...payload})
 
             response.status(200).json({
                 statusCode: 200,
@@ -66,21 +65,29 @@ export default class AuthController {
 
         const jwt = await auth.use('jwt').loginViaRefreshToken(refresh)
 
+        response.cookie('x-refresh-token', jwt.refreshToken, {
+            httpOnly: true,
+            maxAge: 86400 * 30, // 30 days
+            secure: false
+        })
+
         response.ok({
-            message: 'access token created',
+            message: i18n.formatMessage('auth.refresh_token'),
             data: {
-                acces_token : jwt.accessToken
+                access_token : jwt.accessToken
             }
         })
     }
 
     public async logout({ auth, response, i18n }: HttpContextContract){
         await auth.use('jwt').revoke()
-        
+
         response.clearCookie('x-refresh-token')
 
-        return {
-            revoked: true
-        }
+        response.ok({
+            message: i18n.formatMessage('auth.logout'),
+        })
     }
+
+    public async forgotPassword({}: HttpContextContract){}
 }
