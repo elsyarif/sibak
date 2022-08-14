@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, beforeSave, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, beforeSave, beforeUpdate, column } from '@ioc:Adonis/Lucid/Orm'
 import slug from 'slug'
 
 export default class Menu extends BaseModel {
@@ -34,7 +34,9 @@ export default class Menu extends BaseModel {
   public updatedAt: DateTime
 
   @beforeSave()
+  @beforeUpdate()
   public static async assignMetaTitle(menu: Menu){
     menu.meta_title = slug(menu.title)
   }
+
 }

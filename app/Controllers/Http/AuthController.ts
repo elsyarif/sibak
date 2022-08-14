@@ -46,8 +46,8 @@ export default class AuthController {
 
             const user = await AuthService.register({...payload})
 
-            response.status(200).json({
-                statusCode: 200,
+            response.created({
+                statusCode: 201,
                 message: i18n.formatMessage('auth.register'),
                 data: user,
             });

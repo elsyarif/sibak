@@ -10,6 +10,6 @@ export default class RoleMenu extends BaseModel {
   public role: BelongsTo<typeof Role>
 
   @belongsTo(() => Menu)
-  public Menu: BelongsTo<typeof Menu>
+  public menu: BelongsTo<typeof Menu>
 
 }
