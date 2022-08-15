@@ -67,7 +67,7 @@ class MenuService{
         return this.menuNode(mainMenu, 0)
     }
 
-    async roleMenus(roleId: string){
+    async roleMenus(roleId){
         const userMenus = await Database.rawQuery(`SELECT m.* FROM role_menus rm
                                                   INNER JOIN menus m on rm.menu_id = m.id
                                                   WHERE m.is_active = TRUE

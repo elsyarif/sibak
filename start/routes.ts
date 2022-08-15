@@ -20,21 +20,25 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-
+// path
 Route.group(() => {
+    // route version
     Route.group(() => {
-        Route.post('/login', 'AuthController.login')
-        Route.post('/register', 'AuthController.register')
 
+        // auth route
         Route.group(() => {
-            Route.get('/', async ({auth}) => {
-              await auth.use("jwt").authenticate();
+            Route.post('/login', 'AuthController.login')
+            Route.post('/register', 'AuthController.register')
+    
+            Route.group(() => {
+                Route.post('/refresh-token', 'AuthController.refresh')
+                Route.delete('/logout', 'AuthController.logout')
+            }).middleware('auth:jwt')
+        }).prefix('/auth')
 
-              return { hello: 'world' }
-            })
-            Route.post('/refresh-token', 'AuthController.refresh')
-            Route.delete('/logout', 'AuthController.logout')
-        }).middleware('auth:jwt')
+        // users route
+        //
+
     }).prefix('/v1')
 }).prefix('/api')
 
