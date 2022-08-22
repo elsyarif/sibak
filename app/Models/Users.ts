@@ -27,7 +27,11 @@ export default class Users extends BaseModel {
   @belongsTo(() => Role)
   public role: BelongsTo<typeof Role>
 
-  @belongsTo(() => UserGroup)
+  @column()
+  @belongsTo(() => UserGroup, {
+    localKey: 'id',
+    foreignKey: 'id'
+  })
   public group: BelongsTo<typeof UserGroup>
 
   @column()

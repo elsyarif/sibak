@@ -1,5 +1,5 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
-import AuthService from "App/services/AuthService";
+import AuthService from "App/Services/AuthService";
 import RegisterSchema from "App/Validators/RegisterUserValidator";
 import Logger from '@ioc:Adonis/Core/Logger';
 
@@ -42,9 +42,10 @@ export default class AuthController {
 
     public async register({ request, response, i18n }: HttpContextContract) {
         try {
+            const {group, role} = request.body()
             const payload = await request.validate(RegisterSchema);
 
-            const user = await AuthService.register({...payload})
+            const user = await AuthService.register({...payload, isActive: true, group, role})
 
             response.created({
                 statusCode: 201,
@@ -53,9 +54,10 @@ export default class AuthController {
             });
 
         } catch (error) {
+            console.log(error)
             response.badRequest({
                 message: "failed",
-                error: error.messages.errors,
+                error: error.message,
             });
         }
     }

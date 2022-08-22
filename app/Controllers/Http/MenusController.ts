@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import MenuService from 'App/services/MenuService'
+import MenuService from 'App/Services/MenuService'
 import CreateMenuValidator from 'App/Validators/CreateMenuValidator'
 
 export default class MenusController {
@@ -40,7 +40,7 @@ export default class MenusController {
         try {
             // validate
             const menu = await this.menuService.update(id, data)
-    
+
             response.ok({
                 statusCode: 200,
                 message: 'update success',

@@ -13,7 +13,7 @@ export default class extends BaseSchema {
       table.integer('views').defaultTo(0).notNullable()
       table.text('description')
       table.enum('status', ['DRAFT', 'PUBLISH', 'REVIEW']).defaultTo('PUBLISH')
-      table.integer('category_id').references('id').inTable('categories')
+      table.integer('category_id').unsigned().references('id').inTable('categories')
       table.string('created_by').references('id').inTable('users')
 
       /**

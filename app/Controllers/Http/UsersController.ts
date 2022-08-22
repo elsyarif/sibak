@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import UserService from 'App/services/UserService'
+import UserService from 'App/Services/UserService'
 
 export default class UsersController {
 
@@ -18,9 +18,9 @@ export default class UsersController {
     public async updateProfile({}: HttpContextContract){}
 
     public async assignUserPermission({}: HttpContextContract){}
-    
+
     public async getUserGroup({response}: HttpContextContract){
-        
+
         const usergroup = await UserService.getUserGroup()
 
         response.ok({
