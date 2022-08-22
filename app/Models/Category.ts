@@ -27,10 +27,10 @@ export default class Category extends BaseModel {
     public image: string;
 
     @column()
-    public is_active: boolean;
+    public isActive: boolean;
 
     @belongsTo(() => Users)
-    public created_by: BelongsTo<typeof Users>;
+    public createdBy: BelongsTo<typeof Users>;
 
     @column.dateTime({ autoCreate: true })
     public createdAt: DateTime;
