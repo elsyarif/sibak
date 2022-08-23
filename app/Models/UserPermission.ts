@@ -12,7 +12,7 @@ export default class UserPermission extends BaseModel {
 
   @column()
   public permissionId: number
-  
+
   @column()
   public menuId: number
 
@@ -20,19 +20,16 @@ export default class UserPermission extends BaseModel {
   public accessName: string
 
   @belongsTo(() => Users, {
-    localKey: "userId",
     foreignKey: "userId"
   })
   public user: BelongsTo<typeof Users>
 
   @belongsTo(() => Permission, {
-    localKey: "permissionId",
     foreignKey: "permissionId"
   })
   public permission: BelongsTo<typeof Permission>
 
   @belongsTo(() => Menu, {
-    localKey: "menuId",
     foreignKey: "menuId"
   })
   public menu: BelongsTo<typeof Menu>

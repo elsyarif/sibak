@@ -54,9 +54,15 @@ export default class AuthController {
             });
 
         } catch (error) {
+            if(error.code === "E_ROW_NOT_FOUND"){
+                return response.badRequest({
+                    message: error.message
+                })
+            }
+
             response.badRequest({
                 message: "failed",
-                error: error.messages.errors,
+                error: error?.messages?.errors,
             });
         }
     }

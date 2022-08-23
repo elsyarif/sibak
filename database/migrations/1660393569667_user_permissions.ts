@@ -10,6 +10,7 @@ export default class extends BaseSchema {
       table.integer('permission_id').unsigned().references('permissions.id')
       table.integer('menu_id').unsigned().references('menus.id')
       table.string('access_name').notNullable()
+      table.unique(['user_id', 'permission_id', 'menu_id'])
     })
   }
 

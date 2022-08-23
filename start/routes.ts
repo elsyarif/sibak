@@ -41,6 +41,7 @@ Route.group(() => {
             // users route
             Route.group(() => {
                 Route.get('/profile', 'UsersController.profile')
+                Route.post('/assign-permission', 'UsersController.assignUserPermission')
             }).prefix('/users')
 
             // Role route
