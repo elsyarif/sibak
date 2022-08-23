@@ -49,13 +49,14 @@ class MenuService{
     }
 
     public async findAllByParams(keyword){
-        return await Database.from(this.table).whereLike('title', keyword).orderBy('title')  
+        return await Database.from(this.table).whereLike('title', keyword).orderBy('title')
     }
 
     async findAll(){
         const menu = await Menu.query().where('is_active', true)
 
         let mainMenu : any[] = []
+
         for (let i = 0; i < menu.length; i++) {
             mainMenu[menu[i].id] = {
                 id: menu[i].id,

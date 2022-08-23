@@ -8,16 +8,17 @@ class RoleService{
         const role = new Role()
         role.name = data.name
         role.description = data.description
-        
+
         return await role.save()
     }
 
     public async findAllByParams(keyword){
-        return await Database.from(this.table).whereLike('name', keyword).orderBy('name')  
+        return await Database.from(this.table).whereLike('name', keyword).orderBy('name')
     }
 
     public async findAll(page = 1, limit = 10){
-        const role = await Database.from(this.table).paginate(page, limit)
+        // const role = await Database.from(this.table).paginate(page, limit)
+        const role = await Database.from(this.table).orderBy('name')
 
         return role
     }

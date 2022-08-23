@@ -7,6 +7,8 @@ export default class UsersController {
         const id = await auth.user?.id
 
         const user = await UserService.profile(id)
+        await user.load('group')
+        await user.load('role')
 
         response.ok({
             statusCode: 200,

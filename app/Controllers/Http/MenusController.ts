@@ -24,7 +24,7 @@ export default class MenusController {
     }
 
     public async findAll({response, i18n}: HttpContextContract){
-        const menu = this.menuService.findAll()
+        const menu = await this.menuService.findAll()
 
         response.ok({
             statusCode: 200,

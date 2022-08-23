@@ -56,13 +56,20 @@ export default class AuthController {
         } catch (error) {
             response.badRequest({
                 message: "failed",
-                error: error.message,
+                error: error.messages.errors,
             });
         }
     }
 
     public async refresh({ auth, request, response, i18n }: HttpContextContract){
         const refresh = request.cookie('x-refresh-token')
+
+        if(!refresh){
+            return response.forbidden({
+                statusCode: 403,
+                message: "refresh token invalid"
+            })
+        }
 
         const jwt = await auth.use('jwt').loginViaRefreshToken(refresh)
 

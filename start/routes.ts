@@ -29,9 +29,9 @@ Route.group(() => {
         Route.group(() => {
             Route.post('/login', 'AuthController.login')
             Route.post('/register', 'AuthController.register')
-    
+            Route.post('/refresh-token', 'AuthController.refresh')
+
             Route.group(() => {
-                Route.post('/refresh-token', 'AuthController.refresh')
                 Route.delete('/logout', 'AuthController.logout')
             }).middleware('auth:jwt')
         }).prefix('/auth')
@@ -39,15 +39,15 @@ Route.group(() => {
         // Guard by auth
         Route.group(() => {
             // users route
-            // Route.group(() => {
-            //     Route.get('/', 'UsersController.profile')
-            // }).prefix('/users').middleware('auth:jwt')
+            Route.group(() => {
+                Route.get('/profile', 'UsersController.profile')
+            }).prefix('/users')
 
             // Role route
             Route.group(() => {
                 Route.get('/', 'RolesController.findAll' )
             }).prefix('/roles')
-            
+
             // Permission route
             Route.group(() => {
                 Route.get('/', 'PermissionsController.findAll')
@@ -57,7 +57,7 @@ Route.group(() => {
             Route.group(() => {
                 Route.get('/', 'MenusController.findAll')
             }).prefix('/menus')
-        
+
         }).middleware('auth:jwt')
     }).prefix('/v1')
 }).prefix('/api')
