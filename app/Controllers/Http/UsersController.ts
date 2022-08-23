@@ -19,6 +19,8 @@ export default class UsersController {
 
     public async assignUserPermission({}: HttpContextContract){}
 
+    public async assignUserRole({}: HttpContextContract){}
+
     public async getUserGroup({response}: HttpContextContract){
 
         const usergroup = await UserService.getUserGroup()

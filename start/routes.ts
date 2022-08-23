@@ -36,9 +36,29 @@ Route.group(() => {
             }).middleware('auth:jwt')
         }).prefix('/auth')
 
-        // users route
-        //
+        // Guard by auth
+        Route.group(() => {
+            // users route
+            // Route.group(() => {
+            //     Route.get('/', 'UsersController.profile')
+            // }).prefix('/users').middleware('auth:jwt')
 
+            // Role route
+            Route.group(() => {
+                Route.get('/', 'RolesController.findAll' )
+            }).prefix('/roles')
+            
+            // Permission route
+            Route.group(() => {
+                Route.get('/', 'PermissionsController.findAll')
+            }).prefix('/permissions')
+
+            // Menu route
+            Route.group(() => {
+                Route.get('/', 'MenusController.findAll')
+            }).prefix('/menus')
+        
+        }).middleware('auth:jwt')
     }).prefix('/v1')
 }).prefix('/api')
 
