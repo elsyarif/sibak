@@ -1,9 +1,11 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel, beforeCreate, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
+import { column, beforeSave, BaseModel, beforeCreate, belongsTo, BelongsTo, hasMany, HasMany, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
 import { v4 as uuid }from 'uuid'
 import Role from './Role'
 import UserGroup from './UserGroup';
+import Product from './Product'
+import Permission from './Permission'
 
 export default class Users extends BaseModel {
   @column({ isPrimary: true })
@@ -24,13 +26,19 @@ export default class Users extends BaseModel {
   @column()
   public rememberMeToken?: string
 
-  @belongsTo(() => Role)
+  @column()
+  public roleId: string
+
+  @belongsTo(() => Role, {
+    foreignKey: 'roleId'
+  })
   public role: BelongsTo<typeof Role>
 
   @column()
+  public groupId: string
+
   @belongsTo(() => UserGroup, {
-    localKey: 'id',
-    foreignKey: 'id'
+    foreignKey: 'groupId'
   })
   public group: BelongsTo<typeof UserGroup>
 
@@ -42,6 +50,14 @@ export default class Users extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @hasMany(() => Product, {
+    foreignKey: "createdBy"
+  })
+  public product: HasMany<typeof Product>
+
+  @manyToMany(() => Permission)
+  public permissions: ManyToMany<typeof Permission>
 
   @beforeCreate()
   public static async assignUuid(user: Users){

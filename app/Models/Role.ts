@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, HasMany, hasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import Users from './Users'
+import Menu from './Menu'
 
 export default class Role extends BaseModel {
   @column({ isPrimary: true })
@@ -16,4 +18,18 @@ export default class Role extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @hasMany(() => Users, {
+    foreignKey: "roleId"
+  })
+  public users: HasMany<typeof Users>
+
+  @manyToMany(() => Menu, {
+    localKey: "id",
+    pivotTable: "role_menus",
+    relatedKey: "id",
+    pivotForeignKey: "role_id",
+    pivotRelatedForeignKey: "menu_id"
+  })
+  public menus: ManyToMany<typeof Menu>
 }

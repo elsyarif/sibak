@@ -6,8 +6,8 @@ export default class ProductVarian extends BaseModel {
   @column({ isPrimary: true })
   public id: string
 
-  @belongsTo(() => Product)
-  public product_id: BelongsTo<typeof Product>
+  @column()
+  public productId: string
 
   @column()
   public sku: string
@@ -44,4 +44,9 @@ export default class ProductVarian extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @belongsTo(() => Product, {
+    foreignKey: "productId"
+  })
+  public product: BelongsTo<typeof Product>
 }

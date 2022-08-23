@@ -6,9 +6,12 @@ import {
     BelongsTo,
     belongsTo,
     column,
+    HasMany,
+    hasMany,
 } from "@ioc:Adonis/Lucid/Orm";
 import slug from "slug";
 import Users from "./Users";
+import Product from "./Product";
 
 export default class Category extends BaseModel {
     @column({ isPrimary: true })
@@ -29,14 +32,19 @@ export default class Category extends BaseModel {
     @column()
     public isActive: boolean;
 
-    @belongsTo(() => Users)
-    public createdBy: BelongsTo<typeof Users>;
-
     @column.dateTime({ autoCreate: true })
     public createdAt: DateTime;
 
     @column.dateTime({ autoCreate: true, autoUpdate: true })
     public updatedAt: DateTime;
+    
+    @belongsTo(() => Users)
+    public createdBy: BelongsTo<typeof Users>;
+
+    @hasMany(() => Product, {
+        foreignKey: "categoryId"
+    })
+    public product: HasMany<typeof Product>
 
     @beforeSave()
     @beforeUpdate()

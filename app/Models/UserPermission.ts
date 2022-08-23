@@ -7,15 +7,24 @@ export default class UserPermission extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @belongsTo(() => Users)
-  public userId: BelongsTo<typeof Users>
+  @column()
+  public userId: string
 
-  @belongsTo(() => Permission)
-  public permissioId: BelongsTo<typeof Permission>
-
-  @belongsTo(() => Menu)
-  public MenuId: BelongsTo<typeof Menu>
+  @column()
+  public permissionId: number
+  
+  @column()
+  public menuId: number
 
   @column()
   public accessName: string
+
+  @belongsTo(() => Users)
+  public user: BelongsTo<typeof Users>
+
+  @belongsTo(() => Permission)
+  public permission: BelongsTo<typeof Permission>
+
+  @belongsTo(() => Menu)
+  public menu: BelongsTo<typeof Menu>
 }

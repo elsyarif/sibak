@@ -10,12 +10,14 @@ export default class extends BaseSeeder {
         {
             id: uuid(),
             name: 'Developer',
-            description: 'Developer'
+            description: 'Developer',
+            isActive: true,
         },
         {
             id: uuid(),
             name: 'Administrator',
-            description: 'Administrator'
+            description: 'Administrator',
+            isActive: true
         }
     ])
   }

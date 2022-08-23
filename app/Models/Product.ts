@@ -7,11 +7,14 @@ import {
     BelongsTo,
     belongsTo,
     column,
+    HasMany,
+    hasMany,
 } from "@ioc:Adonis/Lucid/Orm";
 import { v4 as uuid } from "uuid";
 import slug from "slug";
 import Category from "./Category";
 import Users from "./Users";
+import ProductVarian from "./ProductVarian";
 
 export default class Product extends BaseModel {
     @column({ isPrimary: true })
@@ -28,7 +31,7 @@ export default class Product extends BaseModel {
 
     @column()
     public image: string;
-    
+
     @column()
     public brand: string;
 
@@ -41,17 +44,32 @@ export default class Product extends BaseModel {
     @column()
     public status: string;
 
-    @belongsTo(() => Category)
-    public category_id: BelongsTo<typeof Category>;
+    @column()
+    public categoryId: number;
 
-    @belongsTo(() => Users)
-    public created_by: BelongsTo<typeof Users>;
+    @column()
+    public createdBy: string;
 
     @column.dateTime({ autoCreate: true })
     public createdAt: DateTime;
 
     @column.dateTime({ autoCreate: true, autoUpdate: true })
     public updatedAt: DateTime;
+
+    @belongsTo(() => Category, {
+        foreignKey: "categoryId",
+    })
+    public category: BelongsTo<typeof Category>;
+
+    @belongsTo(() => Users, {
+        foreignKey: "createdBy",
+    })
+    public created: BelongsTo<typeof Users>;
+
+    @hasMany(() => ProductVarian, {
+        foreignKey: "productId"
+    })
+    public variant: HasMany<typeof ProductVarian>;
 
     @beforeCreate()
     public static async assignUuid(product: Product) {

@@ -4,6 +4,7 @@ import Logger from "@ioc:Adonis/Core/Logger";
 import Hash from "@ioc:Adonis/Core/Hash";
 import Database from "@ioc:Adonis/Lucid/Database";
 import UserGroup from "../Models/UserGroup";
+import Role from "App/Models/Role";
 
 class AuthService {
     public async validate(identity: string, passwords: string) {
@@ -27,6 +28,7 @@ class AuthService {
     public async register(registerDto) {
 
         const group = await UserGroup.findOrFail(registerDto.group);
+        const role = await Role.findOrFail(registerDto.role)
 
         const user = new Users()
         user.name = registerDto.name
@@ -35,7 +37,8 @@ class AuthService {
         user.password = registerDto.password
         user.isActive = registerDto.isActive
 
-        await user.save()
+        await user.related('role').associate(role)
+        await user.related('group').associate(group)
 
         return user
     }

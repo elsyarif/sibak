@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, beforeSave, beforeUpdate, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, beforeSave, beforeUpdate, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import slug from 'slug'
+import Role from './Role'
+import Permission from './Permission'
 
 export default class Menu extends BaseModel {
   @column({ isPrimary: true })
@@ -32,6 +34,24 @@ export default class Menu extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @manyToMany(() => Role, {
+    localKey: "id",
+    pivotTable: "role_menus",
+    relatedKey: "id",
+    pivotForeignKey: "menu_id",
+    pivotRelatedForeignKey: "role_id"
+  })
+  public roles: ManyToMany<typeof Role>
+
+  @manyToMany(() => Permission, {
+    pivotTable: "user_permissions",
+    localKey: "id",
+    relatedKey: "id",
+    pivotForeignKey: "menu_id",
+    pivotRelatedForeignKey: "permission_id"
+  })
+  public assignMenu: ManyToMany<typeof Permission>
 
   @beforeSave()
   @beforeUpdate()

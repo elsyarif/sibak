@@ -9,12 +9,6 @@ export default class extends BaseSchema {
       table.string('name', 35).notNullable()
       table.string('description')
       table.boolean('is_active').defaultTo(false)
-
-      /**
-       * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
-       */
-      table.timestamp('created_at', { useTz: true }).nullable()
-      table.timestamp('updated_at', { useTz: true }).nullable()
     })
   }
 
