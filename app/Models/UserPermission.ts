@@ -19,12 +19,21 @@ export default class UserPermission extends BaseModel {
   @column()
   public accessName: string
 
-  @belongsTo(() => Users)
+  @belongsTo(() => Users, {
+    localKey: "userId",
+    foreignKey: "userId"
+  })
   public user: BelongsTo<typeof Users>
 
-  @belongsTo(() => Permission)
+  @belongsTo(() => Permission, {
+    localKey: "permissionId",
+    foreignKey: "permissionId"
+  })
   public permission: BelongsTo<typeof Permission>
 
-  @belongsTo(() => Menu)
+  @belongsTo(() => Menu, {
+    localKey: "menuId",
+    foreignKey: "menuId"
+  })
   public menu: BelongsTo<typeof Menu>
 }

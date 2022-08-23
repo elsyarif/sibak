@@ -15,6 +15,10 @@ class CategoryService{
         await category.save()
     }
 
+    public async findAllByParams(keyword){
+        return await Database.from(this.table).whereLike('name', keyword).orderBy('name')  
+    }
+    
     public async findAll(page = 1, limit = 10){
         return await Database.from(this.table).paginate(page, limit)
     }

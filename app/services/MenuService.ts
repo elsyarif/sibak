@@ -3,7 +3,7 @@ import RoleMenu from 'App/Models/RoleMenu';
 import Menu from '../Models/Menu';
 
 class MenuService{
-
+    private table = "menus"
 
     async createMenu(data){
         const menu = new Menu()
@@ -46,6 +46,10 @@ class MenuService{
         menu.isActive = isActive
 
         return await menu.save()
+    }
+
+    public async findAllByParams(keyword){
+        return await Database.from(this.table).whereLike('title', keyword).orderBy('title')  
     }
 
     async findAll(){
