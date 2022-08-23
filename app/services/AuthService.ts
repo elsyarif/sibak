@@ -26,21 +26,20 @@ class AuthService {
     }
 
     public async register(registerDto) {
-
         const group = await UserGroup.findOrFail(registerDto.group);
-        const role = await Role.findOrFail(registerDto.role)
+        const role = await Role.findOrFail(registerDto.role);
 
-        const user = new Users()
-        user.name = registerDto.name
-        user.username = registerDto.username
-        user.email = registerDto.email
-        user.password = registerDto.password
-        user.isActive = registerDto.isActive
+        const user = new Users();
+        user.name = registerDto.name;
+        user.username = registerDto.username;
+        user.email = registerDto.email;
+        user.password = registerDto.password;
+        user.isActive = registerDto.isActive;
 
-        await user.related('role').associate(role)
-        await user.related('group').associate(group)
+        await user.related("role").associate(role);
+        await user.related("group").associate(group);
 
-        return user
+        return user;
     }
 }
 

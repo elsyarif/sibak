@@ -1,7 +1,7 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import Menu from '../../app/Models/Menu';
+import Menu from 'App/Models/Menu';
 
-export default class extends BaseSeeder {
+export default class MenuSeeder extends BaseSeeder {
   public async run () {
     // Write your database queries inside the run method
     Menu.createMany([

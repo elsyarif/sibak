@@ -54,7 +54,6 @@ export default class AuthController {
             });
 
         } catch (error) {
-            console.log(error)
             response.badRequest({
                 message: "failed",
                 error: error.message,
