@@ -288,6 +288,24 @@
 			"name": "Menus",
 			"item": [
 				{
+					"name": "user-menu",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/menus/user-menu",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"menus",
+								"user-menu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "menus",
 					"request": {
 						"method": "GET",
@@ -299,6 +317,142 @@
 							],
 							"path": [
 								"menus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\" : \"Sub Coba test title new\",\r\n    \"parentId\": 30,\r\n    \"icon\": \"test\",\r\n    \"link\" : \"#\",\r\n    \"isActive\" : false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/menus",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"menus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set-status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isActive\" : true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/menus/3/set-status",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"menus",
+								"3",
+								"set-status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assign role menu",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\" : \"c5f41b33-0a92-4aee-b728-ff9758ef835f\",\r\n    \"menu\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/menus/assign-role-menu",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"menus",
+								"assign-role-menu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove role menu",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/menus/7/remove-role-menu",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"menus",
+								"7",
+								"remove-role-menu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\" : \"Sub Coba test title new update\",\r\n    \"icon\": \"test\",\r\n    \"link\" : \"#\",\r\n    \"isActive\" : false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/menus/30",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"menus",
+								"30"
 							]
 						}
 					},
@@ -455,6 +609,155 @@
 							"path": [
 								"roles",
 								"c7a9cfad-0c97-4451-9d29-bb90deac7446"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "permission",
+			"item": [
+				{
+					"name": "Find All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/permissions",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/permissions/6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"permissions",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"description\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/permissions",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test update\",\r\n    \"description\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/permissions/6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"permissions",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"description\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/permissions",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"permissions"
 							]
 						}
 					},

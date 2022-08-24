@@ -56,6 +56,10 @@ Route.group(() => {
             // Permission route
             Route.group(() => {
                 Route.get('/', 'PermissionsController.findAll')
+                Route.post('/', 'PermissionsController.create')
+                Route.get('/:id', 'PermissionsController.findOne')
+                Route.patch('/:id', 'PermissionsController.update')
+                Route.delete('/:id', 'PermissionsController.remove')
             }).prefix('/permissions')
 
             // Menu route
