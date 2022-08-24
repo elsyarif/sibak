@@ -75,6 +75,15 @@ Route.group(() => {
                 Route.delete('/:id/remove-role-menu', 'MenusController.removeRoleMenu')
             }).prefix('/menus')
 
+            Route.group(() => {
+                Route.post('/', 'CategoriesController.create')
+            }).prefix('/category')
+
+            // route public
+            Route.group(() => {
+                Route.get('/category/:image', 'CategoriesController.getImage')
+            }).prefix("/file")
+
         }).middleware('auth:jwt')
     }).prefix('/v1')
 }).prefix('/api')
