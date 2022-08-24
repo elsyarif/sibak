@@ -8,19 +8,14 @@ export default class MenusController {
     public async create({request, response, i18n}: HttpContextContract){
         const {...data} = request.body()
 
-        try {
-            await request.validate(CreateMenuValidator)
-            const menu = await MenuService.createMenu(data)
+        await request.validate(CreateMenuValidator)
+        const menu = await MenuService.createMenu(data)
 
-            response.created({
-                statusCode: 201,
-                message: i18n.formatMessage('menu.create'),
-                data: menu
-            })
-        } catch (error) {
-
-        }
-
+        response.created({
+            statusCode: 201,
+            message: i18n.formatMessage('menu.create'),
+            data: menu
+        })
     }
 
     public async findAll({response, i18n}: HttpContextContract){
@@ -94,7 +89,7 @@ export default class MenusController {
 
             response.badRequest({
                 statusCode: 400,
-                message: 'Assign role menu success',
+                message: 'Assign role menu failed',
                 error: error.message
             })
         }
@@ -106,7 +101,7 @@ export default class MenusController {
         const menu = await this.menuService.removeRoleMenu(id)
 
         response.ok({
-            statusCode: 201,
+            statusCode: 200,
             message: 'Remove role menu success',
             data: menu
         })
@@ -114,7 +109,7 @@ export default class MenusController {
 
     public async roleMenu({auth, response, i18n}: HttpContextContract){
         // roleId
-        const roleId = await auth.user?.role
+        const roleId = await auth.user?.roleId
 
         const menu = await this.menuService.roleMenus(roleId)
 

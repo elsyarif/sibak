@@ -60,7 +60,13 @@ Route.group(() => {
 
             // Menu route
             Route.group(() => {
+                Route.get('/user-menu', 'MenusController.roleMenu')
                 Route.get('/', 'MenusController.findAll')
+                Route.post('/', 'MenusController.create')
+                Route.put('/:id/set-status', 'MenusController.inActiveMenu')
+                Route.patch('/:id', 'MenusController.update')
+                Route.post('/assign-role-menu', 'MenusController.assignRoleMenu')
+                Route.delete('/:id/remove-role-menu', 'MenusController.removeRoleMenu')
             }).prefix('/menus')
 
         }).middleware('auth:jwt')

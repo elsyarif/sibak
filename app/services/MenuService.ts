@@ -6,29 +6,31 @@ class MenuService{
     private table = "menus"
 
     async createMenu(data){
+        const row = await Database.from('menus').max("sort as idx").where("parent_id", data.parentId).first()
+
         const menu = new Menu()
         menu.title = data.title
         menu.parentId = data.parentId
         menu.icon = data.icon
         menu.link = data.link
         menu.isActive = data.isActive
-        menu.sort = data.sort
+        menu.sort = row.idx +1
 
         return await menu.save()
     }
 
     async assignRoleMenu(assign){
         const roleMenu = new RoleMenu()
-        roleMenu.role = assign.role
-        roleMenu.menu = assign.menu
+        roleMenu.roleId = assign.role
+        roleMenu.menuId = assign.menu
 
         return await roleMenu.save()
     }
 
     async removeRoleMenu(id){
-        const menu = await Menu.findOrFail(id)
+        const roleMen = await RoleMenu.findOrFail(id)
 
-        return await menu.delete()
+        return await roleMen.delete()
     }
 
     async update(id, data){
@@ -73,12 +75,13 @@ class MenuService{
     }
 
     async roleMenus(roleId){
-        const userMenus = await Database.rawQuery(`SELECT m.* FROM role_menus rm
+        const {...userMenu} = await Database.rawQuery(`SELECT m.* FROM role_menus rm
                                                   INNER JOIN menus m on rm.menu_id = m.id
                                                   WHERE m.is_active = TRUE
                                                     AND rm.role_id = ?
                                                     ORDER BY m.sort`, [roleId])
-
+        
+        const userMenus = userMenu[0]
         let mainMenu : any[] = []
         for (let i = 0; i < userMenus.length; i++) {
             mainMenu[userMenus[i].id] = {
