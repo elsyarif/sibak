@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "7f1b2472-428b-49d6-bbcb-a3908cf52ef7",
+		"_postman_id": "5b6e7c07-0e79-43a5-9a9b-c200213b1786",
 		"name": "POS",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20518957"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -65,16 +64,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{TOKEN}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -362,6 +351,110 @@
 							],
 							"path": [
 								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": ":id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/roles/c7a9cfad-0c97-4451-9d29-bb90deac7445",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"roles",
+								"c7a9cfad-0c97-4451-9d29-bb90deac7445"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "id",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Kasir\",\r\n    \"description\": \"Kasir\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/roles",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Kasir1\",\r\n    \"description\": \"Kasir\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/roles/c7a9cfad-0c97-4451-9d29-bb90deac7446",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"roles",
+								"c7a9cfad-0c97-4451-9d29-bb90deac7446"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Kasir1\",\r\n    \"description\": \"Kasir\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/roles/c7a9cfad-0c97-4451-9d29-bb90deac7446",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"roles",
+								"c7a9cfad-0c97-4451-9d29-bb90deac7446"
 							]
 						}
 					},

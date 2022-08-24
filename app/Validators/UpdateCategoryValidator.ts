@@ -43,5 +43,13 @@ export default class UpdateCategoryValidator {
      * }
      *
      */
-    public messages: CustomMessages = {};
+    public messages: CustomMessages = {
+        required: this.ctx.i18n.formatMessage("validation.form.required", {
+            field: "{{ field }}",
+        }),
+        minLength: this.ctx.i18n.formatMessage("validation.form.minLength", {
+            field: "{{ field }}",
+            minLength: "{{options.minLength}}",
+        }),
+    };
 }

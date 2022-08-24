@@ -1,8 +1,7 @@
 import { schema, rules, CustomMessages } from "@ioc:Adonis/Core/Validator";
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
-import Env from "@ioc:Adonis/Core/Env";
 
-export default class CreateCategoryValidator {
+export default class RoleValidator {
     constructor(protected ctx: HttpContextContract) {}
 
     /*
@@ -26,10 +25,7 @@ export default class CreateCategoryValidator {
      */
     public schema = schema.create({
         name: schema.string({ escape: true, trim: true }, [rules.minLength(3)]),
-        image: schema.file({
-            extnames: ["jpg", "png"],
-            size: Env.get("IMG_SIZE"),
-        }),
+        description: schema.string({ escape: true }, [rules.minLength(3)]),
     });
 
     /**

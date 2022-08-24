@@ -13,22 +13,40 @@
 |
 */
 
-import Logger from '@ioc:Adonis/Core/Logger'
-import HttpExceptionHandler from '@ioc:Adonis/Core/HttpExceptionHandler'
-import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Logger from "@ioc:Adonis/Core/Logger";
+import HttpExceptionHandler from "@ioc:Adonis/Core/HttpExceptionHandler";
+import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 
 export default class ExceptionHandler extends HttpExceptionHandler {
-  constructor () {
-    super(Logger)
-  }
+    constructor() {
+        super(Logger);
+    }
 
-  public async handle(error: any, ctx: HttpContextContract): Promise<any> {
-      if (error.code === "E_ROW_NOT_FOUND") {
-        return ctx.response.badRequest({
-          message: "not found"
-        })
-      }
+    public async handle(error: any, ctx: HttpContextContract): Promise<any> {
+		
+        if (error.code === "E_UNAUTHORIZED_ACCESS") {
+            return ctx.response.unauthorized({
+                statusCode: error.status,
+                message: error.message.split(":")[1].trim(),
+            });
+        }
 
-      return super.handle(error, ctx)
-  }
+        if (error.code === "E_ROW_NOT_FOUND") {
+            return ctx.response.notFound({
+                stausCode: error.status,
+                message: error.message.split(":")[1].trim(),
+                error: error.stack,
+            });
+        }
+
+        if (error.code === "E_VALIDATION_FAILURE") {
+            return ctx.response.unprocessableEntity({
+				statusCode: error.status,
+                message: "Error validation",
+                errors: error.messages.errors,
+            });
+        }
+
+        return super.handle(error, ctx);
+    }
 }

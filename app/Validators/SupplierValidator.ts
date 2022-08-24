@@ -46,5 +46,19 @@ export default class SupplierValidator {
      * }
      *
      */
-    public messages: CustomMessages = {};
+    public messages: CustomMessages = {
+        required: this.ctx.i18n.formatMessage("validation.form.required", {
+            field: "{{ field }}",
+        }),
+        unique: this.ctx.i18n.formatMessage("validation.form.unique", {
+            field: "{{ field }}",
+        }),
+        email: this.ctx.i18n.formatMessage("validation.form.email", {
+            field: "{{ field }}",
+        }),
+        minLength: this.ctx.i18n.formatMessage("validation.form.minLength", {
+            field: "{{ field }}",
+            minLength: "{{options.minLength}}",
+        }),
+    };
 }

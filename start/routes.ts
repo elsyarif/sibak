@@ -46,7 +46,11 @@ Route.group(() => {
 
             // Role route
             Route.group(() => {
-                Route.get('/', 'RolesController.findAll' )
+                Route.get('/', 'RolesController.findAll')
+                Route.post('/', 'RolesController.create')
+                Route.get('/:id', 'RolesController.findOne')
+                Route.patch('/:id', 'RolesController.update')
+                Route.delete('/:id', 'RolesController.remove')
             }).prefix('/roles')
 
             // Permission route

@@ -5,6 +5,7 @@ import UserGroup from "App/Models/UserGroup"
 import UserPermission from "App/Models/UserPermission"
 import Users from "App/Models/Users"
 import Database from '@ioc:Adonis/Lucid/Database';
+import BadRequestException from "App/Exceptions/BadRequestException"
 
 class UserService{
 
@@ -37,10 +38,8 @@ class UserService{
             await userPermission.related('menu').associate(menu)
 
         }).catch((err) => {
-            throw new Error(err)
+            throw new BadRequestException("Row not found", 400, err.code)
         })
-
-
     }
 
     public async assignUserGroup(id, data){
