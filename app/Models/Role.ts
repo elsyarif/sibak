@@ -1,6 +1,7 @@
 import { DateTime } from "luxon";
 import {
     BaseModel,
+    beforeCreate,
     beforeSave,
     column,
     HasMany,
@@ -42,7 +43,7 @@ export default class Role extends BaseModel {
     })
     public menus: ManyToMany<typeof Menu>;
 
-    @beforeSave()
+    @beforeCreate()
     public static async assignUuid(role: Role) {
         role.id = uuid();
     }

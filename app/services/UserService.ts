@@ -49,8 +49,8 @@ class UserService{
         return await user.related('group').associate(group)
     }
 
-    public async assignUserRole(id, roleId){
-        const role = await Role.findOrFail(roleId)
+    public async assignUserRole(id, data){
+        const role = await Role.findOrFail(data.role)
         const user = await Users.findOrFail(id)
 
         return await user.related('role').associate(role)
