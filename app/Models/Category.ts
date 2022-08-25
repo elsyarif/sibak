@@ -18,7 +18,7 @@ export default class Category extends BaseModel {
     public id: number;
 
     @column()
-    public parent_id: number;
+    public parentId: number;
 
     @column()
     public name: string;
@@ -32,14 +32,19 @@ export default class Category extends BaseModel {
     @column()
     public isActive: boolean;
 
+    @column()
+    public createdBy: string
+
     @column.dateTime({ autoCreate: true })
     public createdAt: DateTime;
 
     @column.dateTime({ autoCreate: true, autoUpdate: true })
     public updatedAt: DateTime;
     
-    @belongsTo(() => Users)
-    public createdBy: BelongsTo<typeof Users>;
+    @belongsTo(() => Users, {
+        foreignKey: "createdBy"
+    })
+    public created: BelongsTo<typeof Users>;
 
     @hasMany(() => Product, {
         foreignKey: "categoryId"

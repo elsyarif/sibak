@@ -1,18 +1,21 @@
 import Database from "@ioc:Adonis/Lucid/Database"
 import Category from "App/Models/Category"
+import Users from "App/Models/Users"
 
 class CategoryService{
     private table = 'categories'
 
     public async create(data){
+        const user = await Users.findOrFail(data.userId)
+
         const category = new Category()
-        category.parent_id = data.parent_id
+        category.parentId = data.parentId
         category.name = data.name
         category.image = data.image
         category.isActive = data.isActive
-        category.createdBy = data.createdBy
-
-        await category.save()
+        
+        await category.related('created').associate(user)
+        return await category.save()
     }
 
     public async findAllByParams(keyword){
@@ -21,6 +24,10 @@ class CategoryService{
     
     public async findAll(page = 1, limit = 10){
         return await Database.from(this.table).paginate(page, limit)
+    }
+
+    public async findSlug(id){
+        return await Category.findByOrFail('slug', id)
     }
 
     public async findOne(id){

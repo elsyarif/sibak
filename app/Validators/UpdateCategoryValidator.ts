@@ -25,11 +25,12 @@ export default class UpdateCategoryValidator {
      *    ```
      */
     public schema = schema.create({
-        name: schema.string({ escape: true, trim: true }, [rules.minLength(3)]),
-        image: schema.file({
-            extnames: ["jpg", "png"],
+        name: schema.string.nullable({escape: true, trim: true}),
+        image: schema.file.nullableAndOptional({
+            extnames: ['png', 'jpg', 'jpeg', 'gif', 'bmp'],
             size: Env.get("IMG_SIZE"),
         }),
+        isActive: schema.boolean()
     });
 
     /**
@@ -50,6 +51,12 @@ export default class UpdateCategoryValidator {
         minLength: this.ctx.i18n.formatMessage("validation.form.minLength", {
             field: "{{ field }}",
             minLength: "{{options.minLength}}",
+        }),
+        'file.size' : this.ctx.i18n.formatMessage("validation.form.fileSize", {
+            size: "{{ options.size }}"
+        }),
+        'file.extname' : this.ctx.i18n.formatMessage("validation.form.fileExtname", {
+            extnames: "{{ options.extnames }}"
         }),
     };
 }

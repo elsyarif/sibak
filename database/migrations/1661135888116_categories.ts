@@ -11,8 +11,8 @@ export default class extends BaseSchema {
       table.string('slug').notNullable()
       table.string('image')
       table.boolean('is_active').defaultTo(true).notNullable()
-      table.string('created_by').references('id').inTable('users')
-
+      table.uuid('created_by').references('id').inTable('users')
+      table.unique(['slug'])
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */

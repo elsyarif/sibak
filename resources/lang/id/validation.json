@@ -5,6 +5,8 @@
 		"minLength" : "Panjang { field } setidaknya paling sedikit { minLength } karakter",
 		"maxLength": "Panjang { field } tidak boleh melebihi { maxLength } karakter",
 		"unique": "Sudah terdaftar",
-		"notIn": "Bidang { field } : {value} tidak diizinkan."
+		"notIn": "Bidang { field } : {value} tidak diizinkan.",
+		"fileSize": "Ukuran file harus kurang dari { size }",
+		"fileExtname" : "File harus memiliki salah satu dar { extnames } nama ekstensi"
 	}
 }

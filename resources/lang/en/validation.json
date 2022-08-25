@@ -5,6 +5,8 @@
 		"minLength" : "{ field } must be at least { minLength } characters long.",
 		"maxLength": "{ field } cannot be longer than { maxLength } characters long.",
 		"unique": "Already exist",
-		"notIn": "Field { field } : {value} are not allowed."
+		"notIn": "Field { field } : {value} are not allowed.",
+		"fileSize": "File size should be less than { size }",
+		"fileExtname" : "The file must have one of { extnames } extension names"
 	}
 }

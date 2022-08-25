@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5b6e7c07-0e79-43a5-9a9b-c200213b1786",
+		"_postman_id": "70e924a6-5416-4726-b634-682c48f7e6fc",
 		"name": "POS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -758,6 +758,213 @@
 							],
 							"path": [
 								"permissions"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/category",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "id",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/PoscoICT/Downloads/images 10 removebg preview.jpg"
+								},
+								{
+									"key": "name",
+									"value": "test",
+									"type": "default"
+								},
+								{
+									"key": "parentId",
+									"value": "0",
+									"type": "default"
+								},
+								{
+									"key": "isActive",
+									"value": "false",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/category",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "id",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/PoscoICT/Pictures/Striping-Baru-Supra-X-125.png",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "hero neo sds sas",
+									"type": "default"
+								},
+								{
+									"key": "parentId",
+									"value": "0",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "isActive",
+									"value": "true",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/category/14",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"category",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/category/test",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"category",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/category/14",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"category",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/uploads/images/categories/images-10-removebg-preview-7WxvDa.jpg",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"uploads",
+								"images",
+								"categories",
+								"images-10-removebg-preview-7WxvDa.jpg"
 							]
 						}
 					},

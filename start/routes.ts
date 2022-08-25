@@ -17,8 +17,9 @@
 | import './routes/customer'
 |
 */
-
+import { extname } from 'path'
 import Route from '@ioc:Adonis/Core/Route'
+import Drive from '@ioc:Adonis/Core/Drive'
 
 // path
 Route.group(() => {
@@ -77,6 +78,10 @@ Route.group(() => {
 
             Route.group(() => {
                 Route.post('/', 'CategoriesController.create')
+                Route.get('/', 'CategoriesController.findAll')
+                Route.get('/:slug', 'CategoriesController.findOne')
+                Route.patch('/:id', 'CategoriesController.update')
+                Route.delete('/:id', 'CategoriesController.remove')
             }).prefix('/category')
 
             // route public
@@ -85,6 +90,24 @@ Route.group(() => {
             }).prefix("/file")
 
         }).middleware('auth:jwt')
+
+        Route.get('/uploads/*', async ({ request, response }) => {
+            const location = request.param('*').join('/')
+          
+            const exists = await Drive.exists(location)
+
+            if(!exists){
+                return response.notFound({
+                    message: "file not found"
+                })
+            }
+            const { size } = await Drive.getStats(location)
+          
+            response.type(extname(location))
+            response.header('content-length', size)
+          
+            return response.stream(await Drive.getStream(location))
+        })
     }).prefix('/v1')
 }).prefix('/api')
 

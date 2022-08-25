@@ -13,6 +13,7 @@ import {
 import { v4 as uuid } from "uuid";
 import Role from "./Role";
 import UserGroup from "./UserGroup";
+import Category from "./Category";
 import Product from "./Product";
 import UserPermission from "./UserPermission";
 
@@ -59,6 +60,11 @@ export default class Users extends BaseModel {
 
     @column.dateTime({ autoCreate: true, autoUpdate: true })
     public updatedAt: DateTime;
+
+    @hasMany(() => Category,{
+        foreignKey: "createdBy"
+    })
+    public category: HasMany<typeof Category>
 
     @hasMany(() => Product, {
         foreignKey: "createdBy",
