@@ -84,11 +84,11 @@ Route.group(() => {
                 Route.delete('/:id', 'CategoriesController.remove')
             }).prefix('/category')
 
-            // route public
-            Route.group(() => {
-                Route.get('/category/:image', 'CategoriesController.getImage')
-            }).prefix("/file")
-
+            // Product
+            Route.group(()=> {
+                Route.post("/", "ProductsController.create")
+            }).prefix("/product")
+            
         }).middleware('auth:jwt')
 
         Route.get('/uploads/*', async ({ request, response }) => {
