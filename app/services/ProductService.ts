@@ -32,7 +32,7 @@ class ProductService {
         return await Product.query()
             .preload("variant")
             .where("status", this.status.PUBLISH)
-            .whereLike("title", keyword)
+            .andWhereLike("title", `%${keyword}%`)
             .orderBy("title");
     }
 

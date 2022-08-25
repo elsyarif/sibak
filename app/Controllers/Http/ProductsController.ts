@@ -78,13 +78,13 @@ export default class ProductsController {
     }
 
     public async getProduct({ request, response }: HttpContextContract){
-        const keyword = request?.requestData.search
-        console.log(keyword)
+        const { search } = request.qs()
         let product
-        if(!keyword){
-            product = await ProductService.findAllByParams(keyword)
-        }else{
+
+        if(!search){
             product = await ProductService.getProduct()
+        }else{
+            product = await ProductService.findAllByParams(search)
         }
 
         response.ok({
