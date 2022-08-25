@@ -1070,13 +1070,13 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "Test",
+									"value": "Jajal Bos",
 									"type": "text"
 								},
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/idsya/OneDrive/Pictures/Frame 2.jpg"
+									"src": "/C:/Users/idsya/OneDrive/Pictures/hmtlcss.png"
 								},
 								{
 									"key": "brand",
@@ -1085,7 +1085,7 @@
 								},
 								{
 									"key": "status",
-									"value": "DRAFT",
+									"value": "PUBLISH",
 									"type": "text"
 								},
 								{
@@ -1122,7 +1122,7 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "Test updated",
+									"value": "uns",
 									"type": "text"
 								},
 								{
@@ -1133,12 +1133,12 @@
 								},
 								{
 									"key": "brand",
-									"value": "OBHSj",
+									"value": "Kopi Kenagan",
 									"type": "text"
 								},
 								{
 									"key": "status",
-									"value": "DRAFT",
+									"value": "PUBLISH",
 									"type": "text"
 								},
 								{
@@ -1190,7 +1190,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/product?search=tes",
+							"raw": "{{URL}}/product?search=y",
 							"host": [
 								"{{URL}}"
 							],
@@ -1200,7 +1200,7 @@
 							"query": [
 								{
 									"key": "search",
-									"value": "tes"
+									"value": "y"
 								}
 							]
 						}

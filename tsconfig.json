@@ -23,9 +23,6 @@
       ],
       "Database/*": [
         "./database/*"
-      ],
-      "Utils":[
-        "utils/*"
       ]
     },
     "types": [
