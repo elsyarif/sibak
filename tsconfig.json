@@ -25,7 +25,7 @@
         "./database/*"
       ],
       "Utils":[
-        "./utils/*"
+        "utils/*"
       ]
     },
     "types": [

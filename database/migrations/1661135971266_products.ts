@@ -12,9 +12,10 @@ export default class extends BaseSchema {
       table.string('brand')
       table.integer('views').defaultTo(0).notNullable()
       table.text('description')
-      table.enum('status', ['DRAFT', 'PUBLISH', 'REVIEW']).defaultTo('PUBLISH')
+      table.enum('status', ['DRAFT', 'PUBLISH', 'REVIEW']).defaultTo('DRAFT')
       table.integer('category_id').unsigned().references('id').inTable('categories')
       table.string('created_by').references('id').inTable('users')
+      table.unique(["slug"])
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

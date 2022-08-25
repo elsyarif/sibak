@@ -82,8 +82,8 @@ export default class Product extends BaseModel {
         product.slug = slug(product.title);
     }
 
-    @beforeSave()
-    public static async viewsIncrement(product: Product) {
-        product.views = product.views + 1;
-    }
+    // @beforeSave()
+    // public static async viewsIncrement(product: Product) {
+    //     product.views = product?.views ? 0 : +1
+    // }
 }

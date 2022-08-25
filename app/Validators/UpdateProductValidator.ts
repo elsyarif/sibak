@@ -25,7 +25,7 @@ export default class UpdateProductValidator {
      *    ```
      */
     public schema = schema.create({
-        code: schema.string.optional({ trim: true, escape: true }, [rules.minLength(3)]),
+        category: schema.number.optional(),
         title: schema.string.optional({ trim: true, escape: true }, [
             rules.minLength(3),
         ]),
@@ -37,7 +37,7 @@ export default class UpdateProductValidator {
             rules.minLength(3),
         ]),
         description: schema.string.optional({ trim: true, escape: true }, []),
-        status: schema.string.optional({ trim: true, escape: true }, []),
+        status: schema.string({ trim: true, escape: true }, []),
     });
 
     /**

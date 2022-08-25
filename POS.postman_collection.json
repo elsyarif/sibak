@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "70e924a6-5416-4726-b634-682c48f7e6fc",
+		"_postman_id": "7ea5f45b-b0b6-4562-affa-4dbcb4d812d3",
 		"name": "POS",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20518957"
 	},
 	"item": [
 		{
@@ -832,7 +833,7 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/PoscoICT/Downloads/images 10 removebg preview.jpg"
+									"src": "/C:/Users/idsya/OneDrive/Pictures/Ganjil.png"
 								},
 								{
 									"key": "name",
@@ -938,13 +939,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/category/14",
+							"raw": "{{URL}}/category/11",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"category",
-								"14"
+								"11"
 							]
 						}
 					},
@@ -956,7 +957,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/uploads/images/categories/images-10-removebg-preview-7WxvDa.jpg",
+							"raw": "{{URL}}/uploads/images/categories/Ganjil-eYVSyn.png",
 							"host": [
 								"{{URL}}"
 							],
@@ -964,7 +965,243 @@
 								"uploads",
 								"images",
 								"categories",
-								"images-10-removebg-preview-7WxvDa.jpg"
+								"Ganjil-eYVSyn.png"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/product",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/product/24413547-9c4f-4158-a010-86168c0957cc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"product",
+								"24413547-9c4f-4158-a010-86168c0957cc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Slug",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/product/test/detail",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"product",
+								"test",
+								"detail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Test",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/idsya/OneDrive/Pictures/Frame 2.jpg"
+								},
+								{
+									"key": "brand",
+									"value": "OBHSj",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "DRAFT",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "desc",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/product",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Test updated",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/idsya/OneDrive/Pictures/Frame 2.jpg",
+									"disabled": true
+								},
+								{
+									"key": "brand",
+									"value": "OBHSj",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "DRAFT",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "desc",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/product/97f22d67-24a7-4fd7-856d-7756121ea1e8",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"product",
+								"97f22d67-24a7-4fd7-856d-7756121ea1e8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/product/8a69b7b7-eecd-40b3-8eae-8a211417b56d",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"product",
+								"8a69b7b7-eecd-40b3-8eae-8a211417b56d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/product?search=tes",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"product"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "tes"
+								}
 							]
 						}
 					},

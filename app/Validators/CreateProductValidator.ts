@@ -25,7 +25,7 @@ export default class CreateProductValidator {
      *    ```
      */
     public schema = schema.create({
-        code: schema.string({ trim: true, escape: true }, [rules.minLength(3)]),
+        category: schema.number(),
         title: schema.string({ trim: true, escape: true }, [
             rules.minLength(3),
         ]),

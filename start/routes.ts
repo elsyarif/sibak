@@ -86,14 +86,22 @@ Route.group(() => {
 
             // Product
             Route.group(()=> {
+                Route.get("/", "ProductsController.getProduct")
                 Route.post("/", "ProductsController.create")
+                Route.get("/:id", "ProductsController.findOne")
+                Route.get("/:slug/detail", "ProductsController.findBySlug")
+                Route.patch("/:id", "ProductsController.update")
+                Route.delete("/:id", "ProductsController.remove")
+
+                Route.get("/search", "ProductsController.search")
+                // varian
             }).prefix("/product")
-            
+
         }).middleware('auth:jwt')
 
         Route.get('/uploads/*', async ({ request, response }) => {
             const location = request.param('*').join('/')
-          
+
             const exists = await Drive.exists(location)
 
             if(!exists){
@@ -102,10 +110,10 @@ Route.group(() => {
                 })
             }
             const { size } = await Drive.getStats(location)
-          
+
             response.type(extname(location))
             response.header('content-length', size)
-          
+
             return response.stream(await Drive.getStream(location))
         })
     }).prefix('/v1')

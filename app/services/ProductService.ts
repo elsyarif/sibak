@@ -17,7 +17,6 @@ class ProductService {
         const category = await Category.findOrFail(data.category);
 
         const products = new Product();
-        products.code = data.code;
         products.title = data.title;
         products.image = data.image;
         products.brand = data.brand;
@@ -30,7 +29,8 @@ class ProductService {
     }
 
     public async findAllByParams(keyword) {
-        return await Database.from(this.table)
+        return await Product.query()
+            .preload("variant")
             .where("status", this.status.PUBLISH)
             .whereLike("title", keyword)
             .orderBy("title");
@@ -38,13 +38,13 @@ class ProductService {
 
     public async findAll(page = 1, limit = 10) {
         const product = await Database.from(this.table)
-            .join(this.tableVariant, "products.id", "=", "product_varians.product_id")
+            .leftJoin(this.tableVariant, "products.id", "=", "product_varians.product_id")
             .select("*")
             .where("products.status", this.status.PUBLISH)
             .orderBy("products.title")
             .paginate(page, limit);
-
-        return product.toJSON;
+        console.log(product)
+        return await product;
     }
 
     public async getProduct() {
