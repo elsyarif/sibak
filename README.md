@@ -4,19 +4,19 @@ Projek ini adalah simple API menggunakan framework AdonisJS dengan TypeScript,
 digunakan untuk pembelajaran membuat sebuah API dan response multi bahasa [id, en], yang dapat di gunakan oleh semua jenis Frontend librery atau framework.
 Fitur yang ada pada API ini meliputi :
 
-[x] Autentikasi
-<br>
+- [x] Autentikasi
 	- Register
 	- Login
 	- Refresh Token
 	- Logout
-[] Otorisasi
-[x] Role Base Access Permission 
-[x] Menu Access
-[x] Customer
-[x] Supplier
-[x] Category
-[x] Product
+    
+- [ ] Otorisasi
+- [x] Role Base Access Permission 
+- [x] Menu Access
+- [x] Customer
+- [x] Supplier
+- [x] Category
+- [x] Product
 
 ### Teknologi yang digunakan 
 - NodeJs
