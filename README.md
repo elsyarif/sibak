@@ -33,9 +33,7 @@ Fitur yang ada pada API ini meliputi :
 ### Setup
 Clone repository ini untuk mengunduh dan menjalankan dengan perintah.
 
-`git clone `
-
-`cd sibak`
+`git clone https://github.com/elSyarif/sibak.git && cd sibak`
 
 Intall packege
 `npm install` atau `yarn install`
