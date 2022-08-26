@@ -23,7 +23,7 @@ export default class ExceptionHandler extends HttpExceptionHandler {
     }
 
     public async handle(error: any, ctx: HttpContextContract): Promise<any> {
-		
+
         if (error.code === "E_UNAUTHORIZED_ACCESS") {
             return ctx.response.unauthorized({
                 statusCode: error.status,
@@ -40,7 +40,6 @@ export default class ExceptionHandler extends HttpExceptionHandler {
         }
 
         if (error.code === "E_VALIDATION_FAILURE") {
-            console.log(error)
             return ctx.response.unprocessableEntity({
 				statusCode: error.status,
                 message: "Error validation",

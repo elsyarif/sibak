@@ -3,6 +3,7 @@ import Category from "App/Models/Category";
 import Product from "App/Models/Product";
 import ProductVarian from "App/Models/ProductVarian";
 import Users from "App/Models/Users";
+import Logger from '@ioc:Adonis/Core/Logger'
 
 class ProductService {
     protected table = "products";
@@ -12,6 +13,7 @@ class ProductService {
         REVIEW: "REVIEW",
         PUBLISH: "PUBLISH",
     }
+
     public async create(userId, data) {
         const user = await Users.findOrFail(userId);
         const category = await Category.findOrFail(data.category);
@@ -26,6 +28,21 @@ class ProductService {
         await products.related("created").associate(user);
         await products.related("category").associate(category);
         return await products.save();
+    }
+
+    public async createProduct(userId, data){
+
+        const product = await Database.transaction(async (trx) => {
+            const user = await trx.query().select("*").from('users').where('id', userId).first()
+
+            const response = await trx.insertQuery()
+                .table(this.table)
+                .insert({...data, create_by: user.id})
+
+                return response[0]
+            })
+
+        return product
     }
 
     public async findAllByParams(keyword) {
@@ -43,7 +60,7 @@ class ProductService {
             .where("products.status", this.status.PUBLISH)
             .orderBy("products.title")
             .paginate(page, limit);
-        console.log(product)
+
         return await product;
     }
 
@@ -84,23 +101,8 @@ class ProductService {
     }
 
     // varian
-    public async variantCreate(data) {
-        const product = await Product.findOrFail(data.product);
-
-        const variant = new ProductVarian();
-        variant.sku = data.sku;
-        variant.type = data.type;
-        variant.name = data.name;
-        variant.model = data.model;
-        variant.price = data.price;
-        variant.cost = data.cost;
-        variant.stock = data.stock;
-        variant.minimum = data.minimum;
-        variant.unit = data.unit;
-        variant.description = data.description;
-
-        await variant.related("product").associate(product);
-        return await variant.save();
+    public async variantCreate(data: any[]) {
+        return await ProductVarian.createMany(data)
     }
 
     public async variantUpdate(id, data) {
@@ -116,6 +118,11 @@ class ProductService {
         variant.description = data.description;
 
         return await variant.save();
+    }
+
+    public async removeVarian(id){
+        const variant = await ProductVarian.findOrFail(id);
+        return await variant.delete()
     }
 }
 
