@@ -5,6 +5,7 @@ digunakan untuk pembelajaran membuat sebuah API dan response multi bahasa [id, e
 Fitur yang ada pada API ini meliputi :
 
 [x] Autentikasi
+<br>
 	- Register
 	- Login
 	- Refresh Token
@@ -36,19 +37,24 @@ Clone repository ini untuk mengunduh dan menjalankan dengan perintah.
 `git clone https://github.com/elSyarif/sibak.git && cd sibak`
 
 Intall packege
+<br>
 `npm install` atau `yarn install`
 
 Jalankan migrasi database
+<br>
 `npm run migrate`
 
 Menjalankan dengan mode dev
+<br>
 `npm run dev` atau `yarn dev`
 
 Untuk menjalankan mode prod
+<br>
 `npm run build` atau `yarn build`
 
  ### Catatan
 Simple API ini jauh dari sempurna, jika ada masukan atau diskusi bisa kontak langsung.
  
 terimakasih.
+<br>
 _best regards_
