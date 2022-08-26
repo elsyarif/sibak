@@ -40,6 +40,7 @@ export default class ExceptionHandler extends HttpExceptionHandler {
         }
 
         if (error.code === "E_VALIDATION_FAILURE") {
+            console.log(error)
             return ctx.response.unprocessableEntity({
 				statusCode: error.status,
                 message: "Error validation",

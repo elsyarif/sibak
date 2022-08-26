@@ -5,6 +5,7 @@ import CreateProductValidator from 'App/Validators/CreateProductValidator'
 import EditFilename from 'App/utils/EditFilename';
 import ProductService from 'App/Services/ProductService';
 import UpdateProductValidator from 'App/Validators/UpdateProductValidator';
+import CreateProductVarianValidator from 'App/Validators/CreateProductVarianValidator';
 
 export default class ProductsController {
     protected storage = "images/products/"
@@ -12,7 +13,8 @@ export default class ProductsController {
     public async create({request, response, auth}: HttpContextContract){
         const userId = auth.user?.id
         const payload = await request.validate(CreateProductValidator)
-
+        const { varian } = await request.body()
+        console.log(varian)
         const filename = await EditFilename.rename(payload.image.clientName)
 
         if(!payload.image?.isValid){
@@ -160,4 +162,21 @@ export default class ProductsController {
     }
 
     // variant
+    public async createVarian({params, request, response}: HttpContextContract){
+        const product: string = params.id
+        const { varian } = await request.body()
+
+        let data: any[] = []
+        for (let i = 0; i < varian.length; i++) {
+           data.push({...varian[i], product})        
+        }
+        
+        // const varian = await ProductService.variantCreate(payload)
+        
+        response.created({
+            statusCode: 201,
+            message: "product variant create",
+            data: data
+        })
+    }
 }

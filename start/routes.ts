@@ -93,7 +93,7 @@ Route.group(() => {
                 Route.patch("/:id", "ProductsController.update")
                 Route.delete("/:id", "ProductsController.remove")
 
-                Route.get("/search", "ProductsController.search")
+                Route.post("/:id/variant", "ProductsController.createVarian")
                 // varian
             }).prefix("/product")
 
